@@ -432,7 +432,7 @@ SRR329502	288814	124734094	431.88	0	0
 
 ```
 
-## Acheta domesticus
+## [Acheta domesticus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/acheta_domesticus/ACHETA_DOMESTICUS.md)
 
 **Retriving genome** 
 
@@ -511,12 +511,12 @@ curl https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/313/205/GCA_002313205.1_AS
 gzip -d genome_laupala_kohalensis.fa.gz 
 sed 's/ /_/g' gen_laupala_kohalensis.fa | sed 's/,_whole_genome_shotgun_sequence//g' | sed 's/_Laupala_kohalensis_isolate_Lakoh051//g' > genome_laupala_kohalensis.fa && rm gen_laupala_kohalensis.fa
 ```
-**Run Repeatmodeler and RepeatMasker** TO DO 
+**Run Repeatmodeler and RepeatMasker** 
 
 ```
 mkdir database ; cd database
-BuildDatabase -name DB_laupala_kohalensis -engine NCBI ../genome_laupala_kohalensis.fa
-RepeatModeler -database DB_laupala_kohalensis -engine NCBI -pa 20
+BuildDatabase -name DB_laupala_kohalensis.DB -engine NCBI ../genome_laupala_kohalensis.fa
+RepeatModeler -database DB_laupala_kohalensis.DB -engine NCBI -pa 8
 
 cd .. 
 ln -s ../database/RM_47112.SunMay231510042021/consensi.fa.classified
@@ -557,7 +557,7 @@ ln -s ../database/RM_47112.SunMay231510042021/consensi.fa.classified
 RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_occipitalis.fa
 ```
 
-**Run VARUS** RUNNING 
+**Run VARUS**  
 
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
 ```
@@ -566,12 +566,12 @@ The command is the following, don't forget to replace the `Runlist.txt` if you w
   --speciesGenome=../genome_teleogryllus_occipitalis.fa 
 ```
 
-**Run BRAKER2**
+**Run BRAKER2** RUNNING
 
 First test with arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --softmasking --cores=8 --etpmode 
+perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=occipitalis --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --softmasking --cores=8 --etpmode 
 ```
 
 ## Teleogryllus oceanicus
