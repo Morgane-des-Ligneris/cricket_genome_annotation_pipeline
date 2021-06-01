@@ -1,9 +1,8 @@
-
 ## Acheta domesticus
 
 **Retriving genome** 
 
-I am using the assembly available on the [NCBI](https://www.ncbi.nlm.nih.gov/genome/?term=txid6997[orgn]). It is necessary to simplify the genome headers because it can create errors later in the pipeline. There need to be no spaces or odd caracters, the size need to be less than 50 characters. 
+I am using the assembly available on the [NCBI](https://www.ncbi.nlm.nih.gov/genome/?term=txid6997[orgn]). It is necessary to simplify the genome headers because it can create errors later with BRAKER2. There need to be no spaces or odd caracters, the size need to be less than 50 characters. 
 ```
 curl https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/014/858/955/GCA_014858955.1_NU_Adom_1.1/GCA_014858955.1_NU_Adom_1.1_genomic.fna.gz --output gen_acheta_domesticus.fa.gz
 gzip -d gen_acheta_domesticus.fa.gz  
