@@ -29,17 +29,17 @@ The steps are indicated either RUNNING or TO DO.
 The steps bellow follow the main steps described for example in the following tutorial : ["Tutorial on how to run run BRAKER2 gene prediction pipeline"](https://bioinformaticsworkbook.org/dataAnalysis/GenomeAnnotation/Intro_to_Braker2.html#gsc.tab=0)
 
 ## Steps : 
-- Creating repeats library and sofstmasking the genome with Repeat Masker 
-- Mapping RNAseq data with VARUS 
-- Protein database preparation 
-- Running BRAKER2
-- Checking results with BUSCO
+- Protein database preparation with **ProHint** 
+- Creating repeats library and sofstmasking the genome with **Repeatmodeler and RepeatMasker** 
+- Mapping RNAseq data with **VARUS** (see important instructions bellow)
+- Running **BRAKER2**
+- Checking results with **BUSCO**
 
 ### Protein database preparation
 
-Because there is not enough RNA-seq libraries available. It is possible to try the approach of BRAKER2 with proteins of any evolutionary distance. On Braker github : "We recommend using OrthoDB as basis for proteins.fa. The instructions on how to prepare the input OrthoDB proteins are documented here: https://github.com/gatech-genemark/ProtHint#protein-database-preparation."
+It is possible to try the approach of BRAKER2 with proteins of any evolutionary distance. On Braker github : "We recommend using OrthoDB as basis for proteins.fa. The instructions on how to prepare the input OrthoDB proteins are documented here: https://github.com/gatech-genemark/ProtHint#protein-database-preparation."
 
-As the genome of interest is an insect, we can try with arthropoda proteins. This is inside the `crickets`folder.
+As the genome of interest is an insect, we can try with arthropoda proteins.
 ```
 mkdir proteins ; cd proteins ; 
 wget https://v100.orthodb.org/download/odb10_arthropoda_fasta.tar.gz
@@ -49,7 +49,7 @@ cat arthropoda/Rawdata/* > proteins.fasta
 
 ### Retriving RNAseq libraries using VARUS 
 
-Inside the each species folder, from the description on how to run VARUS it is first to have the file `VARUSparameters.txt` in the working directory. You can either copy the file available here [VARUSparameters.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/VARUSparameters.txt) create the file and paste the following content : 
+Inside the each species folder, from the description on how to run VARUS it is necessary to have the file `VARUSparameters.txt` in the working directory. You can either copy the file available here [VARUSparameters.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/VARUSparameters.txt) create the file and paste the following content : 
 ```
 --batchSize 50000
 --blockSize 5000
@@ -82,7 +82,7 @@ Inside the each species folder, from the description on how to run VARUS it is f
 
 The `--qualityThreshold` was diminished to 1 because it is not only the RNAseq data from the studied specie but also the other one chosen here. 
 
-After you can run the command indicated in each specie sections. Following that in order to align RNAseq data from all the species and not just itself, you have to go (rather quickly) inside the newly created folder with the name of the specie and replace the `Runlist.txt` with the file available here [Runlist.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/Runlist.txt). It is all the accession from the five species selected.
+After you can run the command indicated in each specie sections. Following that, in order to align RNAseq data from all the species of interest here, and not just itself, you have to go (rather quickly) inside the newly created folder with the name of the specie and replace the `Runlist.txt` with the file available here [Runlist.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/Runlist.txt). It is all the accession from the species selected.
 This needs to be done during the indexing of the genome, otherwise it will be too late once the program starts to map the data.
 
 # BRAKER2 installation
@@ -153,5 +153,11 @@ Funannotate is another pipeline that can be installed using conda. [Link for the
 - [STAR](http://manpages.ubuntu.com/manpages/focal/man1/STAR.1.html)
 - [VARUS](https://github.com/Gaius-Augustus/VARUS)
 - [SRA-toolkit](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit)
+- [BUSCO](https://busco.ezlab.org/busco_userguide.html#conda-package) 
+```
+docker pull ezlabgva/busco:v5.1.3_cv1
+# command to run BUSCO from the docker image
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1
+```
 
 

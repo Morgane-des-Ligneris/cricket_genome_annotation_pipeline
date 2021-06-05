@@ -1,4 +1,3 @@
---aligner STAR
 --batchSize 50000
 --blockSize 5000
 --components 1
@@ -8,17 +7,15 @@
 --exportObservationsToFile 1
 --exportParametersToFile 1
 --fastqDumpCall fastq-dump
---genomeDir /mnt/mydatalocal/crickets/teleogryllus_occipitalis/varus2/teleogryllus_occipitalis/genome/
---genomeFaFile /mnt/mydatalocal/crickets/teleogryllus_occipitalis/varus2/../genome_teleogryllus_occipitalis.fa
---lambda 10
+--genomeDir ./genome/
+--lambda 10.0
 --lessInfo 1
 --loadAllOnce 0
 --maxBatches 300
 --mergeThreshold 10
---outFileNamePrefix /mnt/mydatalocal/crickets/teleogryllus_occipitalis/varus2/teleogryllus_occipitalis/
---pathToParameters /mnt/mydatalocal/crickets/teleogryllus_occipitalis/varus2/teleogryllus_occipitalis/VARUSparameters.txt
---pathToRuns /mnt/mydatalocal/crickets/teleogryllus_occipitalis/varus2/teleogryllus_occipitalis/
---pathToSTAR 
+--outFileNamePrefix ./
+--pathToParameters ./VARUSparameters.txt
+--pathToRuns ./
 --pathToVARUS /home/ubuntu/data/mydatalocal/tools/VARUS/Implementation/
 --profitCondition 0
 --pseudoCount 1
@@ -27,3 +24,4 @@
 --readParametersFromFile 1
 --runThreadN 10
 --verbosityDebug 1
+

@@ -15,9 +15,8 @@ mkdir database ; cd database
 BuildDatabase -name DB_laupala_kohalensis.DB -engine NCBI ../genome_laupala_kohalensis.fa
 RepeatModeler -database DB_laupala_kohalensis.DB -engine NCBI -pa 8
 
-cd .. 
-ln -s ../database/RM_47112.SunMay231510042021/consensi.fa.classified
-RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_occipitalis.fa
+cd .. ; ln -s ./database/RM_19.MonMay312019252021/consensi.fa.classified 
+RepeatMasker -pa 10 -gff -lib consensi.fa.classified genome_laupala_kohalensis.fa
 ```
 
 **Run VARUS** TO DO 

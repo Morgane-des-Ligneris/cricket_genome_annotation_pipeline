@@ -7,11 +7,15 @@ gzip -d gen_teleogryllus_oceanicus.fa.gz
 sed 's/_pilon teleogryllus_oceanicus_toce1_core_36_89_1 scaffold//g' gen_teleogryllus_oceanicus.fa > genome_teleogryllus_oceanicus.fa && rm gen_teleogryllus_oceanicus.fa
 ```
 
-**Run Repeatmodeler and RepeatMasker** TO DO 
+**Run Repeatmodeler and RepeatMasker** 
 
 ```
-BuildDatabase -name teleogryllus_oceanicus.DB -engine NCBI genome_teleogryllus_oceanicus.fa
-RepeatModeler -database teleogryllus_oceanicus.DB -engine NCBI -pa 20
+mkdir database ; cd database 
+BuildDatabase -name teleogryllus_oceanicus.DB -engine NCBI ../genome_teleogryllus_oceanicus.fa
+RepeatModeler -database teleogryllus_oceanicus.DB -engine NCBI -pa 10
+cd .. 
+ln -s ./database/RM_24.ThuJun31149132021/consensi.fa.classified # use it with your consenti.fa.classified path 
+RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa # Running 
 ```
 
 **Run VARUS** TO DO 
