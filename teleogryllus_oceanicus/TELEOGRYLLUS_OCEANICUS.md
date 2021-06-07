@@ -15,14 +15,14 @@ BuildDatabase -name teleogryllus_oceanicus.DB -engine NCBI ../genome_teleogryllu
 RepeatModeler -database teleogryllus_oceanicus.DB -engine NCBI -pa 10
 cd .. 
 ln -s ./database/RM_24.ThuJun31149132021/consensi.fa.classified # use it with your consenti.fa.classified path 
-RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa # Running 
+RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa  
 ```
 
-**Run VARUS** TO DO 
+**Run VARUS** TO DO  
 
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics \
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
   --latinGenus=teleogryllus --latinSpecies=oceanicus \
   --speciesGenome=../genome_teleogryllus_oceanicus.fa 
 ```

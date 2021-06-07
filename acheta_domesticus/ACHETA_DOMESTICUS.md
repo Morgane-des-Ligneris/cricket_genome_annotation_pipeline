@@ -19,9 +19,10 @@ cd .. ; ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified
 RepeatMasker -pa 10 -gff -lib consensi.fa.classified genome_acheta_domesticus.fa
 ```
 
-**Run VARUS** TO DO 
+**Run VARUS**  # TO DO 
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics \
-  --latinGenus=acheta --latinSpecies=domesticus --speciesGenome=../genome_acheta_domesticus.fa 
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=HISAT --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
+  --latinGenus=acheta --latinSpecies=domesticus \
+  --speciesGenome=../genome_acheta_domesticus.fa 
 ```

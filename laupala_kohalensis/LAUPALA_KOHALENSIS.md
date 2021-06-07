@@ -24,7 +24,7 @@ RepeatMasker -pa 10 -gff -lib consensi.fa.classified genome_laupala_kohalensis.f
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species. 
 For this specie we are 'tcheating', because there is no RNAseq data available but I still want to see if RNAseq data from other species is aligning I am putting intentionnaly the wrong name since we are anyway changing the `Runlist.txt` file. 
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics \
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
   --latinGenus=teleogryllus --latinSpecies=occipitalis \
   --speciesGenome=../genome_laupala_kohalensis.fa  
 ```

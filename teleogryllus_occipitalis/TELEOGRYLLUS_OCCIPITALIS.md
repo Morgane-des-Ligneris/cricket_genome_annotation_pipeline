@@ -23,11 +23,12 @@ ln -s ./database/RM_21.ThuJun32100582021/consensi.fa.classified # use it with yo
 RepeatMasker -pa 30 -lib consensi.fa.classified genome_teleogryllus_occipitalis.fa # RUNNING
 ```
 
-**Run VARUS**  
-
-The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
+**Run VARUS**  RUNNING
+Paste the file `VARUSparameters.txt`, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics \
+mkdir varus ; cd varus 
+# create or paste VARUSparameters.txt
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
   --latinGenus=teleogryllus --latinSpecies=occipitalis \
   --speciesGenome=../genome_teleogryllus_occipitalis.fa 
 ```
@@ -40,7 +41,7 @@ cd .. ; mkdir braker2 ; cd braker2 ;
 perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=occipitalis --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --softmasking --cores=8 --etpmode 
 ```
 
-**Run BUSCO** DONE 
+**Run BUSCO**  
 
 ```
 docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker2/braker/proteins.fa -o busco -l arthropoda_odb10 --cpu 8
