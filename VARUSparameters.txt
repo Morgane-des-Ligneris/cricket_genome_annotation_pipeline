@@ -1,4 +1,4 @@
---batchSize 50000
+--batchSize 500000
 --blockSize 5000
 --components 1
 --cost 0.001
@@ -11,7 +11,7 @@
 --lambda 10.0
 --lessInfo 1
 --loadAllOnce 0
---maxBatches 300
+--maxBatches 5000
 --mergeThreshold 10
 --outFileNamePrefix ./
 --pathToParameters ./VARUSparameters.txt
@@ -19,9 +19,8 @@
 --pathToVARUS /home/ubuntu/data/mydatalocal/tools/VARUS/Implementation/
 --profitCondition 0
 --pseudoCount 1
---qualityThreshold 1
+--qualityThreshold 5
 --randomSeed 1
 --readParametersFromFile 1
---runThreadN 10
+--runThreadN 8
 --verbosityDebug 1
-

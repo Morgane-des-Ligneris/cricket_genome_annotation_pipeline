@@ -16,15 +16,18 @@ BuildDatabase -name DB_laupala_kohalensis.DB -engine NCBI ../genome_laupala_koha
 RepeatModeler -database DB_laupala_kohalensis.DB -engine NCBI -pa 8
 
 cd .. ; ln -s ./database/RM_19.MonMay312019252021/consensi.fa.classified 
-RepeatMasker -pa 10 -gff -lib consensi.fa.classified genome_laupala_kohalensis.fa
+RepeatMasker -pa 16 -lib consensi.fa.classified genome_laupala_kohalensis.fa -xsmall
 ```
 
-**Run VARUS** TO DO 
+**Run VARUS** RUNNING  
 
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species. 
 For this specie we are 'tcheating', because there is no RNAseq data available but I still want to see if RNAseq data from other species is aligning I am putting intentionnaly the wrong name since we are anyway changing the `Runlist.txt` file. 
+
+Before running the following command you also need to had `--limitGenomeGenerateRAM 106616438144` ligne 312 of the `runVarus.pl` file, in order for STAR to be able to index this genome. 
+
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
-  --latinGenus=teleogryllus --latinSpecies=occipitalis \
-  --speciesGenome=../genome_laupala_kohalensis.fa  
+mkdir varus ; cd varus 
+# create or paste VARUSparameters.txt
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=gryllus --latinSpecies=bimaculatus --speciesGenome=../genome_laupala_kohalensis.fa.masked --nocreateRunList  
 ```

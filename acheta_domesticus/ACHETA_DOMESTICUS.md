@@ -14,15 +14,33 @@ sed 's/ /_/g' gen_acheta_domesticus.fa | sed 's/,_whole_genome_shotgun_sequence/
 mkdir database ; cd database 
 BuildDatabase -name acheta_domesticus.DB -engine NCBI ../genome_acheta_domesticus.fa
 RepeatModeler -database acheta_domesticus.DB -engine NCBI -pa 8
- 
 cd .. ; ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified
-RepeatMasker -pa 10 -gff -lib consensi.fa.classified genome_acheta_domesticus.fa
+RepeatMasker -pa 30 -lib consensi.fa.classified genome_acheta_domesticus.fa -xsmall
 ```
 
 **Run VARUS**  # TO DO 
-The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
+VARUS is running with STAR but this genome there need to have a parameter adjusted in order to work. 
+The parameter is the following in STAR --help : 
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=HISAT --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
-  --latinGenus=acheta --latinSpecies=domesticus \
-  --speciesGenome=../genome_acheta_domesticus.fa 
+genomeChrBinNbits           18
+    int: =log2(chrBin), where chrBin is the size of the bins for genome storage: each chromosome will occupy an integer number of bins. For a genome with large number of contigs, it is recommended to scale this parameter as min(18, log2[max(GenomeLength/NumberOfReferences,ReadLength)])
 ```
+The number of references is : 
+```
+grep "^>" genome_acheta_domesticus.fa | wc -l 
+709385
+```
+The Genome length is around 934Mb. So the log2(GenomeLength/NumberOfReferences) is equal 0.3968537. I rounded it to 1 to make it a whole number. I looked to this calcul following this issue advice <https://github.com/alexdobin/STAR/issues/103>
+
+So following another recommandation of STAR, it is necessary to add those two parameter in ligne 312 of `runVARUS.pl`.
+```
+--genomeChrBinNbits 1 --genomeSAindexNbases 13
+```
+
+The command is then the following, don't forget to add the `Runlist.txt` inside the newly created folder `acheta_domesticus` since the createRunList is disable to put our custom `Runlist.txt` to align all the RNAseq data available for the five species.
+```
+mkdir varus ; cd varus 
+# create or paste VARUSparameters.txt
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=acheta --latinSpecies=domesticus --speciesGenome=../genome_acheta_domesticus.fa.masked --nocreateRunList
+```
+

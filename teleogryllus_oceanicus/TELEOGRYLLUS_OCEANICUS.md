@@ -15,7 +15,7 @@ BuildDatabase -name teleogryllus_oceanicus.DB -engine NCBI ../genome_teleogryllu
 RepeatModeler -database teleogryllus_oceanicus.DB -engine NCBI -pa 10
 cd .. 
 ln -s ./database/RM_24.ThuJun31149132021/consensi.fa.classified # use it with your consenti.fa.classified path 
-RepeatMasker -pa 20 -gff -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa  
+RepeatMasker -pa 16 -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa -xsmall
 ```
 
 **Run VARUS** TO DO  
