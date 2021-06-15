@@ -51,7 +51,7 @@ cat arthropoda/Rawdata/* > proteins.fasta
 
 Inside the each species folder, from the description on how to run VARUS it is necessary to have the file `VARUSparameters.txt` in the working directory. You can either copy the file available here [VARUSparameters.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/VARUSparameters.txt) create the file and paste the following content : 
 ```
---batchSize 50000
+--batchSize 500000
 --blockSize 5000
 --components 1
 --cost 0.001
@@ -64,7 +64,7 @@ Inside the each species folder, from the description on how to run VARUS it is n
 --lambda 10.0
 --lessInfo 1
 --loadAllOnce 0
---maxBatches 300
+--maxBatches 5000
 --mergeThreshold 10
 --outFileNamePrefix ./
 --pathToParameters ./VARUSparameters.txt
@@ -72,10 +72,10 @@ Inside the each species folder, from the description on how to run VARUS it is n
 --pathToVARUS /home/ubuntu/data/mydatalocal/tools/VARUS/Implementation/
 --profitCondition 0
 --pseudoCount 1
---qualityThreshold 1
+--qualityThreshold 5
 --randomSeed 1
 --readParametersFromFile 1
---runThreadN 10
+--runThreadN 8
 --verbosityDebug 1
 
 ```
