@@ -7,8 +7,13 @@ I am using the assembly available on this [platform](http://gbimaculatusgenome.r
 curl https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/017/312/745/GCA_017312745.1_Gbim_1.0/GCA_017312745.1_Gbim_1.0_genomic.fna.gz --output gen_gryllus_bimaculatus.fa.gz
 gzip -d gen_gryllus_bimaculatus.fa.gz
 sed 's/ /_/g' gen_gryllus_bimaculatus.fa | sed 's/,_whole_genome_shotgun_sequence//g' | sed 's/_Gryllus_bimaculatus_DNA,//g' > genome_gryllus_bimaculatus.fa && rm gen_gryllus_bimaculatus.fa
-
 ```
+
+**Busco on the assembly**
+```
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_gryllus_bimaculatus.fa -o busco_assembly_bimaculatus -l arthropoda_odb10 --cpu 6
+```
+
 **Run Repeatmodeler and RepeatMasker**
 
 ```
@@ -39,32 +44,33 @@ Running with arthropoda proteins and bam file alligned against all RNAseq librai
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
 perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=bimaculatus --genome=genome_gryllus_bimaculatus.fa.masked --bam=./varus/VARUS.bam --prot_seq=../proteins/proteins.fasta --softmasking --etpmode --cores=8
+
+
+cd .. ; mkdir braker2 ; cd braker2 ;
+perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=bimaculatus --genome=../genome_gryllus_bimaculatus.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode --MAKEHUB_PATH=/mnt/mydatalocal/tools/MakeHub/  --makehub --email=morgane.des-ligneris@etu.univ-lyon1.fr
 ```
 
-**Run BUSCO** done without the correct softmasking, need to be done again once the correct softmasking is finished
+ WARNING: in file /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl at line 1341
+file /mnt/mydatalocal/cricket_genome_annotation_pipeline/gryllus_bimaculatus/braker2/braker/genome.fa contains a highly fragmented assembly (47877 scaffolds). This may lead to problems when running AUGUSTUS via braker in parallelized mode. You set --cores=8. You should run braker.pl in linear mode on such genomes, though (--cores=1).
+
+**Run BUSCO** 
 
 ```
-docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker/proteins.fa -o busco_bimaculatus -l arthropoda_odb10 --cpu 8
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker/augustus.hints.aa -o busco_bimaculatus -l arthropoda_odb10 --cpu 6
 ```
-
+Fisrt try done without the correct softmasking, need to be done again once the correct softmasking is finished
 RESULTS in `short_summary.specific.arthropoda_odb10.busco_bimaculatus.txt`.
 
 ```
-# BUSCO version is: 5.1.3 
-# The lineage dataset is: arthropoda_odb10 (Creation date: 2020-09-10, number of genomes: 90, number of BUSCOs: 1013)
-# Summarized benchmarking in BUSCO notation for file /busco_wd/braker/proteins.fa
-# BUSCO was run in mode: proteins
-
-	***** Results: *****
-
-	C:100.0%[S:2.0%,D:98.0%],F:0.0%,M:0.0%,n:1013	   
-	1013	Complete BUSCOs (C)			   
-	20	Complete and single-copy BUSCOs (S)	   
-	993	Complete and duplicated BUSCOs (D)	   
-	0	Fragmented BUSCOs (F)			   
-	0	Missing BUSCOs (M)			   
-	1013	Total BUSCO groups searched		   
-
-Dependencies and versions:
-	hmmsearch: 3.2
+        --------------------------------------------------
+        |Results from dataset arthropoda_odb10            |
+        --------------------------------------------------
+        |C:64.1%[S:57.2%,D:6.9%],F:3.0%,M:32.9%,n:1013    |
+        |649    Complete BUSCOs (C)                       |
+        |579    Complete and single-copy BUSCOs (S)       |
+        |70     Complete and duplicated BUSCOs (D)        |
+        |30     Fragmented BUSCOs (F)                     |
+        |334    Missing BUSCOs (M)                        |
+        |1013   Total BUSCO groups searched               |
+        --------------------------------------------------
 ```

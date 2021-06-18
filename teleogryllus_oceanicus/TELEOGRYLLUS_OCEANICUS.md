@@ -18,11 +18,14 @@ ln -s ./database/RM_24.ThuJun31149132021/consensi.fa.classified # use it with yo
 RepeatMasker -pa 16 -lib consensi.fa.classified genome_teleogryllus_oceanicus.fa -xsmall
 ```
 
-**Run VARUS** TO DO  
+**Run VARUS** RUNNING 
+
+Before running the following command you also need to had `--limitGenomeGenerateRAM 139127187498` ligne 312 of the `runVarus.pl` file, in order for STAR to be able to index this genome. 
 
 The command is the following, don't forget to replace the `Runlist.txt` if you want to align all the RNAseq data available for the five species.
+
 ```
-/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 10 --createStatistics \
-  --latinGenus=teleogryllus --latinSpecies=oceanicus \
-  --speciesGenome=../genome_teleogryllus_oceanicus.fa 
+mkdir varus ; cd varus 
+# create or paste VARUSparameters.txt
+/home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=teleogryllus --latinSpecies=oceanicus --speciesGenome=../genome_teleogryllus_oceanicus.fa.masked --nocreateRunList
 ```

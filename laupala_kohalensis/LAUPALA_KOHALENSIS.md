@@ -31,3 +31,10 @@ mkdir varus ; cd varus
 # create or paste VARUSparameters.txt
 /home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=gryllus --latinSpecies=bimaculatus --speciesGenome=../genome_laupala_kohalensis.fa.masked --nocreateRunList  
 ```
+
+**Run BRAKER2**
+
+```
+cd .. ; mkdir braker2 ; cd braker2 ;
+perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=kohenlensis --genome=../genome_laupala_kohalensis.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode --MAKEHUB_PATH=/mnt/mydatalocal/tools/MakeHub/  --makehub --email=morgane.des-ligneris@etu.univ-lyon1.fr
+```

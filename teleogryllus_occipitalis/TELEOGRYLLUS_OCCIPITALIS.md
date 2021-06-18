@@ -35,14 +35,13 @@ mkdir varus ; cd varus
 First test with arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=occipitalis --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --softmasking --cores=8 --etpmode --MAKEHUB_PATH=/mnt/mydatalocal/tools/MakeHub/ --ab_initio --makehub --email=morgane.des-ligneris@etu.univ-lyon1.fr
+perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=occipitalis --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=14 --etpmode --MAKEHUB_PATH=/mnt/mydatalocal/tools/MakeHub/  --makehub --email=morgane.des-ligneris@etu.univ-lyon1.fr
 ```
 
 **Run BUSCO** done without the correct softmasking, need to be done again once the correct softmasking is finished
 
 ```
-docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker2/braker/proteins.fa -o busco -l arthropoda_odb10 --cpu 8
- 
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker2/braker/augustus.hints.aa -o BRAKER2 -l arthropoda_odb10 --cpu 8
 ```
 
 RESULTS in `short_summary.specific.arthropoda_odb10.busco_bimaculatus.txt`.

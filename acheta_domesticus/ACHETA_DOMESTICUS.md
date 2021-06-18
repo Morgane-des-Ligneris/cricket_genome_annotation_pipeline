@@ -9,6 +9,25 @@ gzip -d gen_acheta_domesticus.fa.gz
 sed 's/ /_/g' gen_acheta_domesticus.fa | sed 's/,_whole_genome_shotgun_sequence//g' | sed 's/_Acheta_domesticus_isolate_YG1991//g' > genome_acheta_domesticus.fa && rm gen_acheta_domesticus.fa
 ```
 
+**Busco on the assembly**
+```
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_acheta_domesticus.fa -o busco_assembly_domesticus -l arthropoda_odb10 --cpu 6
+```
+Results :
+```
+        --------------------------------------------------
+        |Results from dataset arthropoda_odb10            |
+        --------------------------------------------------
+        |C:45.0%[S:43.9%,D:1.1%],F:38.7%,M:16.3%,n:1013   |
+        |456    Complete BUSCOs (C)                       |
+        |445    Complete and single-copy BUSCOs (S)       |
+        |11     Complete and duplicated BUSCOs (D)        |
+        |392    Fragmented BUSCOs (F)                     |
+        |165    Missing BUSCOs (M)                        |
+        |1013   Total BUSCO groups searched               |
+        --------------------------------------------------
+```
+
 **Run Repeatmodeler and RepeatMasker** 
 ```
 mkdir database ; cd database 
@@ -18,7 +37,7 @@ cd .. ; ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified
 RepeatMasker -pa 30 -lib consensi.fa.classified genome_acheta_domesticus.fa -xsmall
 ```
 
-**Run VARUS**  # TO DO 
+**Run VARUS**  RUNNING
 VARUS is running with STAR but this genome there need to have a parameter adjusted in order to work. 
 The parameter is the following in STAR --help : 
 ```
@@ -30,14 +49,14 @@ The number of references is :
 grep "^>" genome_acheta_domesticus.fa | wc -l 
 709385
 ```
-The Genome length is around 934Mb. So the log2(GenomeLength/NumberOfReferences) is equal 0.3968537. I rounded it to 1 to make it a whole number. I looked to this calcul following this issue advice <https://github.com/alexdobin/STAR/issues/103>
+The Genome length is around 929173017. So the GenomeLength/NumberOfReferences is equal 1309.829. I looked to this calcul following this issue advice <https://github.com/alexdobin/STAR/issues/103> 
+So this calcul log2(929173017/709385) is equal to 10.35516
 
 So following another recommandation of STAR, it is necessary to add those two parameter in ligne 312 of `runVARUS.pl`.
-```
---genomeChrBinNbits 1 --genomeSAindexNbases 13
-```
+```--genomeChrBinNbits 10 --genomeSAindexNbases 13 ```
 
 The command is then the following, don't forget to add the `Runlist.txt` inside the newly created folder `acheta_domesticus` since the createRunList is disable to put our custom `Runlist.txt` to align all the RNAseq data available for the five species.
+
 ```
 mkdir varus ; cd varus 
 # create or paste VARUSparameters.txt

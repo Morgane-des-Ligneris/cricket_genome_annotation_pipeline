@@ -51,7 +51,7 @@ cat arthropoda/Rawdata/* > proteins.fasta
 
 Inside the each species folder, from the description on how to run VARUS it is necessary to have the file `VARUSparameters.txt` in the working directory. You can either copy the file available here [VARUSparameters.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/VARUSparameters.txt) create the file and paste the following content : 
 ```
---batchSize 500000
+--batchSize 100000
 --blockSize 5000
 --components 1
 --cost 0.001
@@ -64,7 +64,7 @@ Inside the each species folder, from the description on how to run VARUS it is n
 --lambda 10.0
 --lessInfo 1
 --loadAllOnce 0
---maxBatches 5000
+--maxBatches 500
 --mergeThreshold 10
 --outFileNamePrefix ./
 --pathToParameters ./VARUSparameters.txt
@@ -80,9 +80,7 @@ Inside the each species folder, from the description on how to run VARUS it is n
 
 ```
 
-The `--qualityThreshold` was diminished to 1 because it is not only the RNAseq data from the studied specie but also the other one chosen here. 
-
-After you can run the command indicated in each specie sections. Following that, in order to align RNAseq data from all the species of interest here, and not just itself, you have to go (rather quickly) inside the newly created folder with the name of the specie and replace the `Runlist.txt` with the file available here [Runlist.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/Runlist.txt). It is all the accession from the species selected.
+After that you can run the command indicated in each specie sections. Following that, in order to align RNAseq data from all the species of interest here, and not just itself, you have to go inside the newly created folder with the name of the specie and replace the `Runlist.txt` with the file available here [Runlist.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/Runlist.txt). It is all the accession from the species selected.
 This needs to be done during the indexing of the genome, otherwise it will be too late once the program starts to map the data.
 
 # BRAKER2 installation
@@ -140,14 +138,11 @@ sudo apt-get install libmysql++-dev
 - Biopython
 - cdbfasta
 
-## FUNNANOTATE INSTALLATION 
-
-Funannotate is another pipeline that can be installed using conda. [Link for the installation](https://funannotate.readthedocs.io/en/latest/install.html)
-
 # OTHER SOFTWARES TO INSTALL 
 - [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 - [RepeatModeler and Repeat Masker](https://github.com/ISUgenomics/bioinformatics-workbook/blob/master/dataAnalysis/ComparativeGenomics/RepeatModeler_RepeatMasker.md). Installed using the [Dfam TE Tools Container](https://github.com/Dfam-consortium/TETools) with [docker](https://www.docker.com). Container activated with 
 ```
+/your/path/to/dfam-tetools.sh --docker
 /home/ubuntu/data/mydatalocal/tools/dfam-tetools.sh --docker
 ```
 - [STAR](http://manpages.ubuntu.com/manpages/focal/man1/STAR.1.html)
