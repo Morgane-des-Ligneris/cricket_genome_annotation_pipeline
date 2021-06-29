@@ -13,6 +13,19 @@ sed 's/ /_/g' gen_gryllus_bimaculatus.fa | sed 's/,_whole_genome_shotgun_sequenc
 ```
 docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_gryllus_bimaculatus.fa -o busco_assembly_bimaculatus -l arthropoda_odb10 --cpu 6
 ```
+```
+        --------------------------------------------------
+        |Results from dataset arthropoda_odb10            |
+        --------------------------------------------------
+        |C:98.9%[S:96.6%,D:2.3%],F:0.5%,M:0.6%,n:1013     |
+        |1002   Complete BUSCOs (C)                       |
+        |979    Complete and single-copy BUSCOs (S)       |
+        |23     Complete and duplicated BUSCOs (D)        |
+        |5      Fragmented BUSCOs (F)                     |
+        |6      Missing BUSCOs (M)                        |
+        |1013   Total BUSCO groups searched               |
+        --------------------------------------------------
+```
 
 **Run Repeatmodeler and RepeatMasker**
 
@@ -58,7 +71,7 @@ file /mnt/mydatalocal/cricket_genome_annotation_pipeline/gryllus_bimaculatus/bra
 ```
 docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m proteins -i ./braker/augustus.hints.aa -o busco_bimaculatus -l arthropoda_odb10 --cpu 6
 ```
-Fisrt try done without the correct softmasking, need to be done again once the correct softmasking is finished
+Fisrt done without the correct softmasking, need to be done again once the correct softmasking is finished
 RESULTS in `short_summary.specific.arthropoda_odb10.busco_bimaculatus.txt`.
 
 ```

@@ -7,6 +7,24 @@ gzip -d gen_teleogryllus_oceanicus.fa.gz
 sed 's/_pilon teleogryllus_oceanicus_toce1_core_36_89_1 scaffold//g' gen_teleogryllus_oceanicus.fa > genome_teleogryllus_oceanicus.fa && rm gen_teleogryllus_oceanicus.fa
 ```
 
+**Busco on the assembly**
+```
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_teleogryllus_oceanicus.fa -o busco_assembly_oceanicus -l arthropoda_odb10 --cpu 6
+```
+```
+        --------------------------------------------------
+        |Results from dataset arthropoda_odb10            |
+        --------------------------------------------------
+        |C:92.5%[S:90.6%,D:1.9%],F:5.4%,M:2.1%,n:1013     |
+        |937    Complete BUSCOs (C)                       |
+        |918    Complete and single-copy BUSCOs (S)       |
+        |19     Complete and duplicated BUSCOs (D)        |
+        |55     Fragmented BUSCOs (F)                     |
+        |21     Missing BUSCOs (M)                        |
+        |1013   Total BUSCO groups searched               |
+        --------------------------------------------------
+```
+
 **Run Repeatmodeler and RepeatMasker** 
 
 ```

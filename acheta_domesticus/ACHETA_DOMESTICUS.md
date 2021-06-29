@@ -63,3 +63,10 @@ mkdir varus ; cd varus
 /home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=acheta --latinSpecies=domesticus --speciesGenome=../genome_acheta_domesticus.fa.masked --nocreateRunList
 ```
 
+**Run BRAKER2** 
+
+With arthropoda proteins and RNAseq librairies from the species studied here. 
+```
+cd .. ; mkdir braker2 ; cd braker2 ;
+perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=domesticus --genome=../genome_acheta_domesticus.fa.masked --bam=../varus/acheta_domesticus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
+```

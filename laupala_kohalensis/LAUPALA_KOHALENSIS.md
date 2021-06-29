@@ -8,6 +8,25 @@ curl https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/313/205/GCA_002313205.1_AS
 gzip -d genome_laupala_kohalensis.fa.gz 
 sed 's/ /_/g' gen_laupala_kohalensis.fa | sed 's/,_whole_genome_shotgun_sequence//g' | sed 's/_Laupala_kohalensis_isolate_Lakoh051//g' > genome_laupala_kohalensis.fa && rm gen_laupala_kohalensis.fa
 ```
+
+**Busco on the assembly**
+```
+docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_laupala_kohalensis.fa -o busco_assembly_kohalensis -l arthropoda_odb10 --cpu 6
+```
+```
+        --------------------------------------------------        
+        |Results from dataset arthropoda_odb10            |
+        --------------------------------------------------        
+        |C:99.0%[S:95.8%,D:3.2%],F:0.6%,M:0.4%,n:1013     |
+        |1002   Complete BUSCOs (C)                       |
+        |970    Complete and single-copy BUSCOs (S)       |  
+        |32     Complete and duplicated BUSCOs (D)        |
+        |6      Fragmented BUSCOs (F)                     |
+        |5      Missing BUSCOs (M)                        |
+        |1013   Total BUSCO groups searched               |
+        --------------------------------------------------
+```
+
 **Run Repeatmodeler and RepeatMasker** 
 
 ```
