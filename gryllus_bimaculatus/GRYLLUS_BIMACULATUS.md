@@ -67,7 +67,7 @@ So the command was addapted using only 1 thread :
 
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=bimaculatus --genome=../genome_gryllus_bimaculatus.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
+braker.pl --species=bimaculatus --genome=../genome_gryllus_bimaculatus.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
 ```
 
 But the command was started on the Thu Jun 17 07:44:24 2021 and still not finished on the Wed Jun 30 2021. It had reached the PREDICTING GENES WITH AUGUSTUS step.
