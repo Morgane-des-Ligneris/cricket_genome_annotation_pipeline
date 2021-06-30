@@ -11,7 +11,7 @@ sed 's/ /_/g' gen_acheta_domesticus.fa | sed 's/,_whole_genome_shotgun_sequence/
 
 **Busco on the assembly**
 ```
-docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1 busco -m genome -i genome_acheta_domesticus.fa -o busco_assembly_domesticus -l arthropoda_odb10 --cpu 6
+busco -m genome -i genome_acheta_domesticus.fa -o busco_assembly_domesticus -l arthropoda_odb10 --cpu 6
 ```
 Results :
 ```
@@ -34,8 +34,8 @@ mkdir database ; cd database
 BuildDatabase -name acheta_domesticus.DB -engine NCBI ../genome_acheta_domesticus.fa
 
 RepeatModeler -database acheta_domesticus.DB -engine NCBI -pa 8
-#change the folowing command with your path 
 cd .. 
+#change the folowing command with your path to the final consensi.fa.classified file 
 ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified 
 
 RepeatMasker -pa 30 -lib consensi.fa.classified genome_acheta_domesticus.fa -xsmall
@@ -57,7 +57,9 @@ The Genome length is around 929173017. So the GenomeLength/NumberOfReferences is
 So this calcul log2(929173017/709385) is equal to 10.35516
 
 So following another recommandation of STAR, it is necessary to add the `genomeChrBinNbits` to 10 and `genomeSAindexNbases` to 13 in ligne 312 of `runVARUS.pl`. Delate it when using BRAKER2 for another species. 
-```--genomeChrBinNbits 10 --genomeSAindexNbases 13 ```
+```
+--genomeChrBinNbits 10 --genomeSAindexNbases 13 
+```
 
 The command is then the following, don't forget to add the `Runlist.txt` inside the newly created folder `acheta_domesticus` since the createRunList is disable to put our custom `Runlist.txt` to align all the RNAseq data available for the five species.
 
@@ -75,5 +77,5 @@ There was unfortunatly no time to run this command.
 With arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=domesticus --genome=../genome_acheta_domesticus.fa.masked --bam=../varus/acheta_domesticus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
+braker.pl --species=domesticus --genome=../genome_acheta_domesticus.fa.masked --bam=../varus/acheta_domesticus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
 ```
