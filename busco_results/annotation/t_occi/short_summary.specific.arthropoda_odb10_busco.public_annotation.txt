@@ -1,0 +1,17 @@
+# BUSCO version is: 5.1.3 
+# The lineage dataset is: arthropoda_odb10 (Creation date: 2020-09-10, number of genomes: 90, number of BUSCOs: 1013)
+# Summarized benchmarking in BUSCO notation for file /busco_wd/Teleogryllus_occipitalis_geneset.fasta
+# BUSCO was run in mode: proteins
+
+	***** Results: *****
+
+	C:96.3%[S:94.2%,D:2.1%],F:1.6%,M:2.1%,n:1013	   
+	975	Complete BUSCOs (C)			   
+	954	Complete and single-copy BUSCOs (S)	   
+	21	Complete and duplicated BUSCOs (D)	   
+	16	Fragmented BUSCOs (F)			   
+	22	Missing BUSCOs (M)			   
+	1013	Total BUSCO groups searched		   
+
+Dependencies and versions:
+	hmmsearch: 3.2

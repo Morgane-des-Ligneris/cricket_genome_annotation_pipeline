@@ -1,0 +1,16 @@
+INFO:__main__	****************** Start plot generation at 06/20/2021 10:00:44 ******************
+INFO:__main__	Load data ...
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.A_domesticus.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.G_bimaculatus.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.L_kohalensis.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.T_occipitalis.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.T_oceanicus.txt successfully
+INFO:__main__	Generate the R code ...
+INFO:__main__	Run the R code ...
+INFO:__main__	
+[1] "Plotting the figure ..."
+[1] "Done"
+
+INFO:__main__	Plot generation done. Total running time: 3.8272571563720703 seconds
+INFO:__main__	Results written in ./
+

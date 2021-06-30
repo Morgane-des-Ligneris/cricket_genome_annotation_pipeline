@@ -1,0 +1,13 @@
+INFO:__main__	****************** Start plot generation at 06/20/2021 09:50:58 ******************
+INFO:__main__	Load data ...
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.A_domesticus.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.G_bimaculatus.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.L_kohalensis.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.T_occipitalis.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_assembly.T_oceanicus.txt successfully
+INFO:__main__	Generate the R code ...
+INFO:__main__	Run the R code ...
+WARNING:__main__	Impossible to run R. The package ggplot2 does not seem to be installed. Please check your R installation. See also the --no_r option to avoid this message
+INFO:__main__	Plot generation done with WARNING(s). Total running time: 1.6775507926940918 seconds
+INFO:__main__	Results written in ./
+

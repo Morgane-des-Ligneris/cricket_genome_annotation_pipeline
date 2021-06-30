@@ -1,0 +1,14 @@
+INFO:__main__	****************** Start plot generation at 06/20/2021 10:18:41 ******************
+INFO:__main__	Load data ...
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_annotation.braker2.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco_annotation.braker2_ab_initio.txt successfully
+INFO:__main__	Loaded ./short_summary.specific.arthropoda_odb10_busco.public_annotation.txt successfully
+INFO:__main__	Generate the R code ...
+INFO:__main__	Run the R code ...
+INFO:__main__	
+[1] "Plotting the figure ..."
+[1] "Done"
+
+INFO:__main__	Plot generation done. Total running time: 3.245610475540161 seconds
+INFO:__main__	Results written in ./
+
