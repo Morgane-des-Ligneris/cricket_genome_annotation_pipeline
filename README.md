@@ -167,3 +167,4 @@ sudo apt-get install libmysql++-dev
 - [VARUS](https://github.com/Gaius-Augustus/VARUS)
 - [SRA-toolkit](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit)
 - [BUSCO](https://busco.ezlab.org/busco_userguide.html#conda-package) 
+- [IGV](https://software.broadinstitute.org/software/igv/)
