@@ -58,7 +58,10 @@ mkdir varus ; cd varus
 
 **Run BRAKER2**
 
+There was unfortunatly no time to finish this command. At the first run the same warning than for _Gryllus bimaculatus_. was issued. The command was addapted, started on Thu Jun 17 13:32:01 2021 but still not finished on the Wed Jun 30 2021. It had also reached the PREDICTING GENES WITH AUGUSTUS step.
+
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-perl /home/ubuntu/data/mydatalocal/tools/BRAKER/scripts/braker.pl --species=kohenlensis --genome=../genome_laupala_kohalensis.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
+braker.pl --species=kohenlensis --genome=../genome_laupala_kohalensis.fa.masked --bam=../varus2/gryllus_bimaculatus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=1 --etpmode 
 ```
+
