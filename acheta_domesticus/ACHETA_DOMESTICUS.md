@@ -32,13 +32,17 @@ Results :
 ```
 mkdir database ; cd database 
 BuildDatabase -name acheta_domesticus.DB -engine NCBI ../genome_acheta_domesticus.fa
+
 RepeatModeler -database acheta_domesticus.DB -engine NCBI -pa 8
-cd .. ; ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified
+#change the folowing command with your path 
+cd .. 
+ln -s ./database/RM_18.MonMay310935222021/consensi.fa.classified 
+
 RepeatMasker -pa 30 -lib consensi.fa.classified genome_acheta_domesticus.fa -xsmall
 ```
 
-**Run VARUS**  RUNNING
-VARUS is running with STAR but this genome there need to have a parameter adjusted in order to work. 
+**Run VARUS**  
+VARUS is running with STAR but for this genome there need to have a parameter adjusted in order to work. 
 The parameter is the following in STAR --help : 
 ```
 genomeChrBinNbits           18
@@ -52,7 +56,7 @@ grep "^>" genome_acheta_domesticus.fa | wc -l
 The Genome length is around 929173017. So the GenomeLength/NumberOfReferences is equal 1309.829. I looked to this calcul following this issue advice <https://github.com/alexdobin/STAR/issues/103> 
 So this calcul log2(929173017/709385) is equal to 10.35516
 
-So following another recommandation of STAR, it is necessary to add those two parameter in ligne 312 of `runVARUS.pl`.
+So following another recommandation of STAR, it is necessary to add the `genomeChrBinNbits` to 10 and `genomeSAindexNbases` to 13 in ligne 312 of `runVARUS.pl`. Delate it when using BRAKER2 for another species. 
 ```--genomeChrBinNbits 10 --genomeSAindexNbases 13 ```
 
 The command is then the following, don't forget to add the `Runlist.txt` inside the newly created folder `acheta_domesticus` since the createRunList is disable to put our custom `Runlist.txt` to align all the RNAseq data available for the five species.
@@ -61,9 +65,10 @@ The command is then the following, don't forget to add the `Runlist.txt` inside 
 mkdir varus ; cd varus 
 # create or paste VARUSparameters.txt
 /home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=acheta --latinSpecies=domesticus --speciesGenome=../genome_acheta_domesticus.fa.masked --nocreateRunList
+# paste Runlist.txt inside the newly created acheta_domesticus file
 ```
 
-**Run BRAKER2** 
+**Run BRAKER2**  COMMAND TO RUN 
 
 With arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
