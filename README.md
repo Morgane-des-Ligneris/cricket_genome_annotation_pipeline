@@ -18,7 +18,7 @@ The pipeline used is BRAKER2.
 
 To see the steps realized on each crickets just go on the specie folder. Or click on the following links :
 - [Acheta domesticus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/acheta_domesticus/ACHETA_DOMESTICUS.md)
-- [Gryllus bimacultus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/gryllus_bimacultus/GRYLLUS_BIMACULTUS.md)
+- [Gryllus bimaculatus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/gryllus_bimaculatus/GRYLLUS_BIMACULATUS.md)
 - [Laupala kohalensis](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/laupala_kohalensis/LAUPALA_KOHALENSIS.md)
 - [Teleogryllus occipitalis](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/teleogryllus_occipitalis/TELEOGRYLLUS_OCCIPITALIS.md)
 - [Teleogryllus oceanicus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/teleogryllus_oceanicus/TELEOGRYLLUS_OCEANICUS.md)
