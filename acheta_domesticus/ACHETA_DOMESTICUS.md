@@ -68,7 +68,9 @@ mkdir varus ; cd varus
 # paste Runlist.txt inside the newly created acheta_domesticus file
 ```
 
-**Run BRAKER2**  COMMAND TO RUN 
+**Run BRAKER2**  
+
+There was unfortunatly no time to run this command. 
 
 With arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
