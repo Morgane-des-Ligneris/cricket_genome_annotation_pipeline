@@ -52,7 +52,7 @@ Paste the file `VARUSparameters.txt`, and don't forget to replace the `Runlist.t
 mkdir varus ; cd varus 
 # create or paste VARUSparameters.txt
 /home/ubuntu/data/mydatalocal/tools/VARUS/runVARUS.pl --aligner=STAR --readFromTable=0 --createindex=1 --runThreadN 8 --createStatistics --latinGenus=teleogryllus --latinSpecies=occipitalis --speciesGenome=../genome_teleogryllus_occipitalis.fa.masked --nocreateRunList
-# paste Runlist.txt inside the newly created gryllus_bimaculatus file
+# paste Runlist.txt inside the newly created teleogryllus_occipitalis file
 ```
 
 **Run BRAKER2** 
@@ -60,7 +60,7 @@ mkdir varus ; cd varus
 The command is run with arthropoda proteins and RNAseq librairies from the species studied here. 
 ```
 cd .. ; mkdir braker2 ; cd braker2 ;
-braker.pl --species=oceanicus --genome=../genome_teleogryllus_oceanicus.fa.masked --bam=../varus/teleogryllus_oceanicus/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=14 --etpmode 
+braker.pl --species=occipitalis --genome=../genome_teleogryllus_occipitalis.fa.masked --bam=../varus2/teleogryllus_occipitalis/VARUS.bam --prot_seq=../../proteins/proteins.fasta --AUGUSTUS_ab_initio --softmasking --cores=14 --etpmode 
 ```
 
 **Run BUSCO** 
@@ -147,11 +147,11 @@ cat ./braker2/braker/braker.gtf | sed -E 's/BLKR([0-9]+).1_//g' > braker.gtf.str
 
 Charge `genome_teleogryllus_occipitalis.fa.masked.strip` as the genome, and `braker.gtf.strip` and `Teleogryllus_occipitalis_geneset.gtf` as tracks on IGV and you can explore results.  
 
-![View1](docs/view1.png)  
+![View1](../docs/view1.png)  
 View 1 : Whole view on scaffold 1  
 
-![View2](docs/view2.png)  
+![View2](../docs/view2.png)  
 View 2 : Zoomed view on scaffold 1 in the region between 1,748 and 1,871 kb  
 
-![View3](docs/view3.png)  
+![View3](../docs/view3.png)  
 View 3 : Zoomed view on scaffold 3 in the region between 1,667 and 1,841 kb
