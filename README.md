@@ -12,7 +12,7 @@
     
 # Introduction 
 
-This document relates the different steps realized to annotate crickets genome. 
+This document relates the different steps realized exploring the annotation of crickets genome during the internship from 01/05/2021 to 30/06/2021.
 
 The pipeline used is BRAKER2.
 
@@ -23,23 +23,45 @@ To see the steps realized on each crickets just go on the specie folder. Or clic
 - [Teleogryllus occipitalis](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/teleogryllus_occipitalis/TELEOGRYLLUS_OCCIPITALIS.md)
 - [Teleogryllus oceanicus](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/teleogryllus_oceanicus/TELEOGRYLLUS_OCEANICUS.md)
 
-The steps are indicated either RUNNING or TO DO.
+Only _T.occipitalis_ was finished during this time of the internship.
+
+# Control quality on genome assembly with busco
+
+The complete BUSCO scores are 45.0% for _A.domesticus_, 98.9% for _G.bimaculatus_, 99.0% for _L.kohalensis_, 97.3% for _T.occipitalis_ and 92.5% for _T.oceanicus_. Assemblies seem to have good quality results in terms of BUSCO completeness score, except for _A.domesticus_ which is fragmented by 38.7% and missing 16.3%. BUSCO scores results are in [Figure 1](#figure).
+
+![Figure 1][figure1]
+Figure 1 : BUSCO scores with Arthropoda dataset for each genome’s assembly
+
+[figure1]: busco_results/assembly/busco_figure.png 
+
 
 # GENOME ANNOTATION 
 The steps bellow follow the main steps described for example in the following tutorial : ["Tutorial on how to run run BRAKER2 gene prediction pipeline"](https://bioinformaticsworkbook.org/dataAnalysis/GenomeAnnotation/Intro_to_Braker2.html#gsc.tab=0)
 
 ## Steps : 
-- Protein database preparation with **ProHint** 
+- Protein database preparation with **ProtHint** (informations bellow)
 - Creating repeats library and sofstmasking the genome with **Repeatmodeler and RepeatMasker** 
 - Mapping RNAseq data with **VARUS** (see important instructions bellow)
 - Running **BRAKER2**
 - Checking results with **BUSCO**
 
-### Protein database preparation
+Illustration of this steps are summurized in Figure 2 :  
 
-It is possible to try the approach of BRAKER2 with proteins of any evolutionary distance. On Braker github : "We recommend using OrthoDB as basis for proteins.fa. The instructions on how to prepare the input OrthoDB proteins are documented here: https://github.com/gatech-genemark/ProtHint#protein-database-preparation."
+![Figure 2][figure2]  
+Figure 2 : Schematic of cricket genome annotation pipeline
 
-As the genome of interest is an insect, we can try with arthropoda proteins.
+[figure2]: docs/pipeline.jpeg
+
+The mode in which BRAKER2 was tested is the pipeline D   
+![Figure 3][figure3]
+
+Figure 3 : BRAKER2 pipeline D : training GeneMark-ETP+ supported by RNA-Seq alignment information and information from proteins (proteins can be of any evolutionary distance) Source : https://github.com/Gaius-Augustus/BRAKER/blob/master/docs/figs/braker2_ep_rnaseq.png 
+
+[figure3]: docs/braker2_ep_rnaseq.png
+
+## Protein database preparation
+
+On Braker2, they recommend using OrthoDB for protein information. Since the genome of interest is an insect, as advised by the pipeline ProtHint used with BRAKER2, we can annotate with the information of proteins of the phylum Arthropoda. All the proteins in fasta format of this phylum were gathered in a file. The instructions on how to prepare the input OrthoDB proteins are documented here: https://github.com/gatech-genemark/ProtHint#protein-database-preparation."
 ```
 mkdir proteins ; cd proteins ; 
 wget https://v100.orthodb.org/download/odb10_arthropoda_fasta.tar.gz
@@ -47,7 +69,7 @@ tar xvf odb10_arthropoda_fasta.tar.gz
 cat arthropoda/Rawdata/* > proteins.fasta
 ```
 
-### Retriving RNAseq libraries using VARUS 
+## Retriving RNAseq libraries using VARUS 
 
 Inside the each species folder, from the description on how to run VARUS it is necessary to have the file `VARUSparameters.txt` in the working directory. You can either copy the file available here [VARUSparameters.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/VARUSparameters.txt) create the file and paste the following content : 
 ```
@@ -81,7 +103,7 @@ Inside the each species folder, from the description on how to run VARUS it is n
 ```
 
 After that you can run the command indicated in each specie sections. Following that, in order to align RNAseq data from all the species of interest here, and not just itself, you have to go inside the newly created folder with the name of the specie and replace the `Runlist.txt` with the file available here [Runlist.txt](https://github.com/Morgane-des-Ligneris/cricket_genome_annotation_pipeline/blob/main/Runlist.txt). It is all the accession from the species selected.
-This needs to be done during the indexing of the genome, otherwise it will be too late once the program starts to map the data.
+This needs to be done during the indexing of the genome, otherwise it will be too late once the program starts to map the data.  
 
 # BRAKER2 installation
 Install BRAKER2 following the instructions on the [gitHub](https://github.com/Gaius-Augustus/BRAKER).
@@ -133,26 +155,15 @@ sudo apt-get install libmysql++-dev
 - [NCBI BLAST+ or DIAMOND](https://github.com/Gaius-Augustus/BRAKER#ncbi-blast-or-diamond) 
 - [ProHints](https://github.com/gatech-genemark/ProtHint)
 
-### Optionnal tools installed 
+## Optionnal tools installed 
 - Samtools
 - Biopython
 - cdbfasta
 
+
 # OTHER SOFTWARES TO INSTALL 
-- [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
-- [RepeatModeler and Repeat Masker](https://github.com/ISUgenomics/bioinformatics-workbook/blob/master/dataAnalysis/ComparativeGenomics/RepeatModeler_RepeatMasker.md). Installed using the [Dfam TE Tools Container](https://github.com/Dfam-consortium/TETools) with [docker](https://www.docker.com). Container activated with 
-```
-/your/path/to/dfam-tetools.sh --docker
-/home/ubuntu/data/mydatalocal/tools/dfam-tetools.sh --docker
-```
+- [RepeatModeler and Repeat Masker](https://github.com/ISUgenomics/bioinformatics-workbook/blob/master/dataAnalysis/ComparativeGenomics/RepeatModeler_RepeatMasker.md). Installed using the [Dfam TE Tools Container](https://github.com/Dfam-consortium/TETools) with [docker](https://www.docker.com). Container activated with ``` /your/path/to/dfam-tetools.sh --docker ```
 - [STAR](http://manpages.ubuntu.com/manpages/focal/man1/STAR.1.html)
 - [VARUS](https://github.com/Gaius-Augustus/VARUS)
 - [SRA-toolkit](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit)
 - [BUSCO](https://busco.ezlab.org/busco_userguide.html#conda-package) 
-```
-docker pull ezlabgva/busco:v5.1.3_cv1
-# command to run BUSCO from the docker image
-docker run -u $(id -u) -v $(pwd):/busco_wd ezlabgva/busco:v5.1.3_cv1
-```
-
-
